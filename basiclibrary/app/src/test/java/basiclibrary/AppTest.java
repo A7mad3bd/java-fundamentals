@@ -5,6 +5,8 @@ package basiclibrary;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
@@ -30,7 +32,7 @@ class AppTest {
     void appHas_containsDuplicates() {
         App classUnderTest = new App();
         boolean testResult = classUnderTest.containsDuplicates(new int[]{1, 2, 6, 7, 6});
-        assertEquals(true, testResult);
+        assertTrue(testResult);
     }
 
     @Test
@@ -40,10 +42,15 @@ class AppTest {
         assertEquals(4.4, testResult);
     }
 
-//    @Test
-//    void appHas_roll() {
-//        App classUnderTest = new App();
-////        int testResult = classUnderTest.roll(new int[]
-////        assertArrayEquals(, testResult);
-//    }
+    @Test
+    void appHas_roll() {
+        boolean testResult = true;
+        int[] arrtest = App.roll(3);
+        for (int elemnt : arrtest) {
+            if (elemnt < 0 || elemnt > 6 || arrtest.length != 3) {
+                testResult = false;
+            }
+        }
+        assertTrue(testResult);
+    }
 }

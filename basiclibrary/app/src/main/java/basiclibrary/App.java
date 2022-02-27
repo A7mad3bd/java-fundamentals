@@ -12,7 +12,7 @@ public class App {
         System.out.println(new App().getGreeting());
         roll(4);
         System.out.println();
-        int[] arr = {1, 2, 6, 7, 6};
+        int[] arr = {1, 2, 7,6, 6};
         System.out.println(containsDuplicates(arr));
         System.out.println(Calculating_Averages(arr));
         int[][] weeklyMonthTemperatures = {
@@ -43,11 +43,12 @@ public class App {
         System.out.println();
 
         boolean result = false;
-        for (int k : array) {
-            for (int i : array) {
-                if (k == i)
+        for (int k =0;k<= array.length-1;k++) {
+            for (int i =0;i<= array.length-1;i++) {
+                if(i!=k){
+                if (array[k] == array[i])
                     result = true;
-            }
+            }}
         }
         return result;
     }
