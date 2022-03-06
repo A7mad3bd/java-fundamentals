@@ -3,12 +3,58 @@
  */
 package linter;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
+
+import static linter.App.FileReader;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    void OneError() {
+        Path path = Paths.get("C:\\Users\\Ahmad Abdallah\\Desktop\\401\\java-fundamentals\\java-fundamentals\\linter\\app\\src\\test\\resources\\ one.js");
+        int Result = FileReader(String.valueOf(path));
+        assertEquals(1, Result);
+    }
+
+    @Test
+    void FewError() {
+        Path path = Paths.get("C:\\Users\\Ahmad Abdallah\\Desktop\\401\\java-fundamentals\\java-fundamentals\\linter\\app\\src\\test\\resources\\ few.js");
+        int Result = FileReader(String.valueOf(path));
+        assertTrue(Result <= 5);
+    }
+
+    @Test
+    void Empty() {
+        Path path = Paths.get("C:\\Users\\Ahmad Abdallah\\Desktop\\401\\java-fundamentals\\java-fundamentals\\linter\\app\\src\\test\\resources\\ empty.js");
+        int Result = FileReader(String.valueOf(path));
+        Boolean flag = false;
+        if (Result == 1) {
+            flag = true;
+        }
+        assertEquals(true, flag);
+    }
+
+    @Test
+    void NoError() {
+        Path path = Paths.get("C:\\Users\\Ahmad Abdallah\\Desktop\\401\\java-fundamentals\\java-fundamentals\\linter\\app\\src\\test\\resources\\ no_errors.js");
+        int Result = FileReader(String.valueOf(path));
+        assertEquals(0, Result - 1);
+    }
+
+    @Test
+    void ManyError() {
+        Path path = Paths.get("C:\\Users\\Ahmad Abdallah\\Desktop\\401\\java-fundamentals\\java-fundamentals\\linter\\app\\src\\test\\resources\\ many.js");
+        int Result = FileReader(String.valueOf(path));
+        assertTrue(Result <= 10);
     }
 }
+
+
+
+
+
+
+

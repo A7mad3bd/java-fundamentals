@@ -11,10 +11,11 @@ package linter;
 3 pts for linter application and associated tests to catch all errors
 1 pts for README
  */
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Collections;
+
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class App {
     public static String weather(int[][] array) {
@@ -25,7 +26,6 @@ public class App {
                 h_set.add(el);
             }
         }
-
         int min = array[0][0], max = array[0][0];
         for (int[] weeklyMonthTemperature : array) {
             for (int index : weeklyMonthTemperature) {
@@ -61,14 +61,52 @@ public class App {
             int count = Collections.frequency(votes, item);//most votes
             if (numVotes < count) {
                 numVotes = count;
-                winner = ( item);
+                winner = (item);
             } else if (numVotes == count) {
                 winner = "Two gets same votes";
             }
         }
         return winner;
     }
-    public static void main(String[] args) {
+
+    public static int FileReader(String Path) {
+        int count = 0;
+        int ans;
+
+        ArrayList<Integer> errLines = new ArrayList<>();
+        try {
+
+            System.out.println("////////////////////////////////////////////////////");
+            Scanner scanner = new Scanner(Path);
+            int line_num = 0;
+            while (scanner.hasNextLine()) {
+                String next_line = scanner.nextLine();
+                line_num++;
+                boolean skips = next_line.equals("")
+                        || next_line.contains("if")
+                        || next_line.contains("else")
+                        || next_line.endsWith("{")
+                        || next_line.endsWith("}");
+
+                if (!skips && !next_line.endsWith(";")) {
+                    errLines.add(line_num);
+                    System.out.println("line " + line_num + " missing semicolon");
+                    count++;
+                }
+            }
+            if(Path=="")
+            ans=0;
+            else
+            ans=errLines.size();
+            System.out.println("errors = " + errLines.size());
+        } finally {
+            System.out.println("program excuted");
+        }
+         return ans;
+    }
+
+
+    public static void main(String[] args) throws IOException {
 
         int[][] weeklyMonthTemperatures = {
                 {66, 64, 58, 65, 71, 57, 60},
@@ -92,6 +130,12 @@ public class App {
         System.out.println(weather(weeklyMonthTemperatures));
         String winner = tally(votes);
         System.out.println(winner + " received the most votes!");
+        System.out.println();
+
+        Path path = Paths.get("C:\\Users\\Motas\\IdeaProjects\\java-fundamentals\\linter\\app\\src\\main\\resources\\ gates.js");
+        FileReader(String.valueOf(path));
     }
+
 }
+
 
