@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public class Restaurant {
     ArrayList reviews = new ArrayList<>();
-
-
     private final String name;
     private double num_stars;
     private final double price;
-
 
     public Restaurant(String name, double num_stars, double price) {
         this.name = name;
@@ -25,8 +22,9 @@ public class Restaurant {
                 " and has " + Review.count + " reviews  ";
     }
 
-    public void addReview(Review review) {
+    public boolean addReview(Review review) {
         reviews.add(review);
+        return true;
     }
 
     public String getName() {

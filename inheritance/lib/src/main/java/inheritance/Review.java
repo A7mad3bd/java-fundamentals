@@ -3,7 +3,7 @@ package inheritance;
 public class Review {
     public static int count;
     public final String body;
-    public final int num_stars;
+    public final double num_stars;
     public final String author;
 
     public Review(String body, int num_stars, String author) {
