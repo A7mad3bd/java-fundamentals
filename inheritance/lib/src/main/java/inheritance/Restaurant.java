@@ -2,7 +2,8 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class Restaurant {
+public class Restaurant implements Places{
+
     ArrayList reviews = new ArrayList<>();
     private final String name;
     private double num_stars;
@@ -27,6 +28,7 @@ public class Restaurant {
         return true;
     }
 
+
     public String getName() {
         return this.name;
     }
@@ -43,5 +45,11 @@ public class Restaurant {
         return this.price;
     }
 
+    public ArrayList getReviews() {
+        return reviews;
+    }
 
+    public double getNum_stars() {
+        return num_stars;
+    }
 }
