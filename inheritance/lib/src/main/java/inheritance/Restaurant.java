@@ -2,7 +2,7 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class Restaurant implements Places{
+public class Restaurant implements Places {
 
     ArrayList reviews = new ArrayList<>();
     private final String name;
