@@ -12,7 +12,7 @@ package linter;
 1 pts for README
  */
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -20,7 +20,7 @@ import java.util.*;
 public class App {
     public static String weather(int[][] array) {
         HashSet<Integer> h_set = new HashSet<>();
-        String final_anser = "";
+        StringBuilder final_anser = new StringBuilder();
         for (int[] row : array) {
             for (int el : row) {
                 h_set.add(el);
@@ -37,17 +37,17 @@ public class App {
                 }
             }
         }
-        final_anser += "Highest is " + max + "\n";
-        final_anser += "Lowest is " + min + "\n\n";
+        final_anser.append("Highest is ").append(max).append("\n");
+        final_anser.append("Lowest is ").append(min).append("\n\n");
 
         int i = min;
         while (i < max) {
             if (!h_set.contains(i))
-                final_anser += "Never seen " + i + "\n";
+                final_anser.append("Never seen ").append(i).append("\n");
             System.out.println();
             i++;
         }
-        return final_anser;
+        return final_anser.toString();
     }
 
     public static String tally(List<String> votes) {
@@ -69,40 +69,32 @@ public class App {
         return winner;
     }
 
-    public static int FileReader(String Path) {
+    public static int FileReaderCountErrors(String filePath) throws IOException {
         int count = 0;
-        int ans;
+        Path path = Paths.get(filePath);
+        System.out.println(path.toAbsolutePath());
+        String semicolon = ";";
+        String semicolon1 = "{";
+        String semicolon2 = "}";
+        String semicolon3 = "if";
+        String semicolon4 = "else";
 
-        ArrayList<Integer> errLines = new ArrayList<>();
-        try {
+        Scanner scanner = new Scanner(path);
+        int line = 0;
 
-            System.out.println("////////////////////////////////////////////////////");
-            Scanner scanner = new Scanner(Path);
-            int line_num = 0;
-            while (scanner.hasNextLine()) {
-                String next_line = scanner.nextLine();
-                line_num++;
-                boolean skips = next_line.equals("")
-                        || next_line.contains("if")
-                        || next_line.contains("else")
-                        || next_line.endsWith("{")
-                        || next_line.endsWith("}");
+        while (scanner.hasNext()) {
+            String this_line = scanner.nextLine();
+            line++;
+            if (this_line.endsWith(semicolon1) || this_line.endsWith(semicolon2) || this_line.endsWith(semicolon3) || this_line.endsWith(semicolon4))
+                continue;
+            if (!this_line.endsWith(semicolon)) {
 
-                if (!skips && !next_line.endsWith(";")) {
-                    errLines.add(line_num);
-                    System.out.println("line " + line_num + " missing semicolon");
+                    System.out.println("Line " + line + ": Missing semicolon.");
                     count++;
-                }
+
             }
-            if(Path=="")
-            ans=0;
-            else
-            ans=errLines.size();
-            System.out.println("errors = " + errLines.size());
-        } finally {
-            System.out.println("program excuted");
         }
-         return ans;
+        return count;
     }
 
 
@@ -132,8 +124,8 @@ public class App {
         System.out.println(winner + " received the most votes!");
         System.out.println();
 
-        Path path = Paths.get("C:\\Users\\Motas\\IdeaProjects\\java-fundamentals\\linter\\app\\src\\main\\resources\\ gates.js");
-        FileReader(String.valueOf(path));
+        String path = "C:\\Users\\Ahmad Abdallah\\Desktop\\401\\java-fundamentals\\java-fundamentals\\linter\\app\\src\\main\\resources\\gates.js";
+        FileReaderCountErrors(path);
     }
 
 }

@@ -1,15 +1,22 @@
 package inheritance;
+
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 
-public class Theater implements Places {
+public class Theater {
+
 
     private final String name;
-    ArrayList reviews = new ArrayList<>();
+    ArrayList arrayList = new ArrayList<Pair>();
+    Pair<String, Integer> reviews = new Pair<String, Integer>("", 0);
+
+
     ArrayList<String> Movies;
 
     public Theater(String name, ArrayList<String> movies) {
         this.name = name;
-        this.Movies=movies;
+        this.Movies = movies;
     }
 
     public void addMovie(String mov) {
@@ -24,13 +31,13 @@ public class Theater implements Places {
     public String toString() {
         return "Theater{" +
                 "name='" + name + '\'' +
-                ", reviews=" + reviews +
+                ", reviews=" + arrayList +
                 ", Movies=" + Movies +
                 '}';
     }
 
-    public boolean addReview(Review review) {
-        reviews.add(review);
+    public boolean addReview(Pair<String, Integer> review) {
+        arrayList.add(review);
         return true;
     }
 
@@ -43,6 +50,6 @@ public class Theater implements Places {
     }
 
     public ArrayList getReviews() {
-        return reviews;
+        return arrayList;
     }
 }

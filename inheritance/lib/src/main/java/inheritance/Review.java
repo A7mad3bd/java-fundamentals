@@ -12,7 +12,9 @@ public class Review {
         this.author = author;
         count++;
     }
-      public String toString() {
+
+
+    public String toString() {
         return "My Review" +
                 " is " + this.body +
                 " and my stars " + this.num_stars +
@@ -22,9 +24,11 @@ public class Review {
     public String getBody() {
         return this.body;
     }
+
     public double geStars() {
         return this.num_stars;
     }
+
     public String getauthor() {
         return this.author;
     }

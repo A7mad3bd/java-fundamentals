@@ -7,11 +7,11 @@ public class Shop implements Places {
     private final String description;
     private final double numdol;
     ArrayList reviews = new ArrayList<>();
-    public Shop(String name, String description, double numdol)
-    {
-        this.name=name;
-        this.description=description;
-        this.numdol=numdol;
+
+    public Shop(String name, String description, double numdol) {
+        this.name = name;
+        this.description = description;
+        this.numdol = numdol;
     }
 
     @Override
